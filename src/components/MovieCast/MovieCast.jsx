@@ -36,9 +36,9 @@ const MovieCast = () => {
                 width="150"
               />
               <ul className={s.text}>
-                <li>Name:{actor.name}</li>
-                <li>Role:{actor.character}</li>
-                <li>Popularity:{actor.popularity} likes</li>
+                <li>Name: {actor.name}</li>
+                <li>Role: {actor.character}</li>
+                <li>Popularity: {actor.popularity} likes</li>
               </ul>
             </li>
           ))}
