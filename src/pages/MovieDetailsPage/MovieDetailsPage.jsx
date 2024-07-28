@@ -52,7 +52,7 @@ const MovieDetailsPage = () => {
             <li className={s.li}>Release date: {movie.release_date}</li>
             <li className={s.li}>Status: {movie.status}</li>
             <li className={s.li}>Idea: {movie.tagline}</li>
-            <li className={s.li}>Overwiev:{movie.overview}</li>
+            <li className={s.li}>Overwiev: {movie.overview}</li>
           </ul>
         </div>
       </div>
