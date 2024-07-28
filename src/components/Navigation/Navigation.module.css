@@ -1,23 +1,28 @@
 .wrapper {
-    background-color: rgb(166, 0, 255);
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+    background-color: rgb(0, 0, 0);
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    padding: 15px;
+    box-shadow: 0px 20px 16px -19px rgba(255, 255, 255, 1);
 }
 
 .link {
     font-size: 30px;
     font-weight: 700;
-    color: blue;
+    color: rgb(255, 255, 255);
     text-decoration: none;
+
 }
 
 .active {
-    color: yellow;
+    box-shadow: 0px 0px 11px 3px rgba(255, 255, 255, 1);
 }
 
 .logo {
-    color: aqua;
+    color: rgb(255, 255, 255);
+    grid-column: 2 / 2;
+    display: flex;
+    justify-content: center;
 }
 
 .logoSpanU {
@@ -28,8 +33,15 @@
     color: yellow;
 }
 
-.nav {
-    display: flex;
-    gap: 20px;
-    list-style: none;
+
+.li {
+    grid-column: 1;
+    grid-row: 1;
+    display: grid;
+    justify-items: end;
+}
+
+.li2 {
+    grid-column: 3;
+    grid-row: 1;
 }

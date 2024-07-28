@@ -2,6 +2,7 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import getImageUrl from "../MovieList/MoviesImg";
+import s from "./MovieCast.module.css";
 
 const MovieCast = () => {
   const { movieId } = useParams();
@@ -23,25 +24,27 @@ const MovieCast = () => {
   }, [movieId]);
 
   return (
-    <div>
-      <h2>Cast</h2>
-      <ul>
-        {cast.map((actor) => (
-          <li key={actor.cast_id}>
-            <img
-              src={getImageUrl(actor.profile_path)}
-              alt={actor.name}
-              width="150"
-            />
-            <div>
-              Name:{actor.name}
-              Role:{actor.character}
-              Popularity:{actor.popularity} likes
-            </div>
-          </li>
-        ))}
-      </ul>
-    </div>
+    <>
+      <h2 className={s.cast}>Cast</h2>
+      <div className={s.container}>
+        <ul className={s.ul}>
+          {cast.map((actor) => (
+            <li key={actor.cast_id} className={s.li}>
+              <img
+                src={getImageUrl(actor.profile_path)}
+                alt={actor.name}
+                width="150"
+              />
+              <ul className={s.text}>
+                <li>Name:{actor.name}</li>
+                <li>Role:{actor.character}</li>
+                <li>Popularity:{actor.popularity} likes</li>
+              </ul>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 };
 

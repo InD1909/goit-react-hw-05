@@ -1,14 +1,19 @@
 import { NavLink } from "react-router-dom";
 import getImageUrl from "./MoviesImg";
+import s from "./MovieList.module.css";
 
 const MovieList = ({ movies }) => {
   return (
-    <ul>
+    <ul className={s.ul}>
       {movies.map((movie) => (
-        <li key={movie.id}>
+        <li key={movie.id} className={s.li}>
           <img src={getImageUrl(movie.poster_path)} alt={movie.title} />
-          <h2>{movie.title}</h2>
-          <NavLink to={`/movies/${movie.id}`}>Go to film</NavLink>
+          <div className={s.container}>
+            <h3 className={s.name}>{movie.title}</h3>
+            <NavLink to={`/movies/${movie.id}`} className={s.link}>
+              Go to film
+            </NavLink>
+          </div>
         </li>
       ))}
     </ul>

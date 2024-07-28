@@ -13,22 +13,33 @@ const Navigation = () => {
         <span className={s.logoSpanU}>U</span>
         <span className={s.logoSpanA}>A</span> CINEMA
       </h1>
-      <nav>
-        <ul className={s.nav}>
-          <li>
-            <NavLink to="/" className={buildLinkClass}>
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink to="/movies" className={buildLinkClass}>
-              Movies
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
+      <div className={s.li}>
+        <NavLink to="/" className={buildLinkClass}>
+          Home
+        </NavLink>
+      </div>
+      <div className={s.li2}>
+        <NavLink to="/movies" className={buildLinkClass}>
+          Movies
+        </NavLink>
+      </div>
     </header>
   );
 };
 
 export default Navigation;
+
+//  <nav>
+//    <ul className={s.nav}>
+//      <li className={s.li}>
+//        <NavLink to="/" className={buildLinkClass}>
+//          Home
+//        </NavLink>
+//      </li>
+//      <li className={s.li2}>
+//        <NavLink to="/movies" className={buildLinkClass}>
+//          Movies
+//        </NavLink>
+//      </li>
+//    </ul>
+//  </nav>;

@@ -1,6 +1,7 @@
 import axios from "axios";
 import MovieList from "../../components/MovieList/MovieList";
 import { useEffect, useState } from "react";
+import s from "./HomePage.module.css";
 
 const HomePage = () => {
   const [movies, setMovies] = useState([]);
@@ -23,7 +24,7 @@ const HomePage = () => {
 
   return (
     <div>
-      <h1>Recent updates</h1>
+      <h1 className={s.title}>Recent updates</h1>
       <MovieList movies={movies} />
     </div>
   );
