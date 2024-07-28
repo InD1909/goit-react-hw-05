@@ -47,11 +47,11 @@ const MovieDetailsPage = () => {
         <div className={s.list}>
           <h2 className={s.title}>{movie.title}</h2>
           <ul>
-            <li className={s.li}>Country:{movie.origin_country}</li>
-            <li className={s.li}>Budget:{movie.budget}</li>
-            <li className={s.li}>Release date:{movie.release_date}</li>
-            <li className={s.li}>Status:{movie.status}</li>
-            <li className={s.li}>Idea:{movie.tagline}</li>
+            <li className={s.li}>Country: {movie.origin_country}</li>
+            <li className={s.li}>Budget: {movie.budget} $</li>
+            <li className={s.li}>Release date: {movie.release_date}</li>
+            <li className={s.li}>Status: {movie.status}</li>
+            <li className={s.li}>Idea: {movie.tagline}</li>
             <li className={s.li}>Overwiev:{movie.overview}</li>
           </ul>
         </div>
