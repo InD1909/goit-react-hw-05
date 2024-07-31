@@ -36,3 +36,10 @@
     justify-content: center;
     margin-top: 40px;
 }
+
+.error {
+    color: #fff;
+    font-weight: 400;
+    display: flex;
+    margin: 0 auto;
+}

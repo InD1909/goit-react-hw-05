@@ -23,7 +23,11 @@ const HomePage = () => {
   return (
     <div>
       <h1 className={s.title}>Recent updates</h1>
-      {error ? <p>{error}</p> : <MovieList movies={movies} />}
+      {error ? (
+        <p className={s.error}>{error}</p>
+      ) : (
+        <MovieList movies={movies} />
+      )}
     </div>
   );
 };

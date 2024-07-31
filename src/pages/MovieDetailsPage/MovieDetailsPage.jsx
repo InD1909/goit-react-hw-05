@@ -36,7 +36,7 @@ const MovieDetailsPage = () => {
           height={100}
           width={100}
           radius={5}
-          color="rgb(255, 193, 38)"
+          color="rgb(255, 255, 255)"
           ariaLabel="ball-triangle-loading"
           wrapperStyle={{}}
           wrapperClass=""
@@ -85,7 +85,7 @@ const MovieDetailsPage = () => {
               height={100}
               width={100}
               radius={5}
-              color="rgb(255, 193, 38)"
+              color="rgb(255, 255, 255)"
               ariaLabel="ball-triangle-loading"
               wrapperStyle={{}}
               wrapperClass=""
