@@ -1,9 +1,10 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import { Suspense, useEffect, useRef, useState } from "react";
+import { NavLink, Outlet, useLocation, useParams } from "react-router-dom";
 import getImageUrl from "../../components/MovieList/MoviesImg";
 import s from "./MovieDetailsPage.module.css";
 import clsx from "clsx";
+import { fetchMovieDetails } from "../../API";
+import { BallTriangle } from "react-loader-spinner";
 
 const buildLinkClass = ({ isActive }) => {
   return clsx(s.navLink, isActive && s.active);
@@ -13,28 +14,41 @@ const MovieDetailsPage = () => {
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
 
+  const location = useLocation();
+
+  const goBackRef = useRef(location?.state || "/movies");
   useEffect(() => {
-    const fetchMovieDetails = async () => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}`,
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0Mzk2YmI2ZmE5ZGYzYTZkYzFjNWY1YWQ5ODVhMGI5MCIsIm5iZiI6MTcyMjA3NzQwMS4xNDQwODksInN1YiI6IjY2YTRjZjU3ZDhhNTJkNzJjZjg3Y2ZjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gGSqTtFneYLfE3HZ0NK6NWEi5UXzyRirlVKnPCIsFiU`,
-          },
-        }
-      );
-      setMovie(response.data);
-    };
-    fetchMovieDetails();
+    try {
+      const getData = async () => {
+        const data = await fetchMovieDetails(movieId);
+        setMovie(data);
+      };
+      getData();
+    } catch (error) {
+      console.log(error);
+    }
   }, [movieId]);
 
   if (!movie) {
-    return <h2>Loading...</h2>;
+    return (
+      <div className={s.loader}>
+        <BallTriangle
+          height={100}
+          width={100}
+          radius={5}
+          color="rgb(255, 193, 38)"
+          ariaLabel="ball-triangle-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+          visible={true}
+        />
+      </div>
+    );
   }
 
   return (
     <div className={s.wrapper}>
-      <NavLink to="/" className={s.link}>
+      <NavLink to={goBackRef.current} className={s.link}>
         {" "}
         ← Go back...
       </NavLink>
@@ -64,6 +78,22 @@ const MovieDetailsPage = () => {
           Reviews
         </NavLink>
       </div>
+      <Suspense
+        fallback={
+          <div className={s.loader}>
+            <BallTriangle
+              height={100}
+              width={100}
+              radius={5}
+              color="rgb(255, 193, 38)"
+              ariaLabel="ball-triangle-loading"
+              wrapperStyle={{}}
+              wrapperClass=""
+              visible={true}
+            />
+          </div>
+        }
+      ></Suspense>
       <Outlet />
     </div>
   );

@@ -1,29 +1,41 @@
-import axios from "axios";
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import s from "./MovieReview.module.css";
+import { fetchMovieReviews } from "../../API";
 
 const MovieReviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
+  const [error, setError] = useState(null);
+  const [noReviews, setNoReviews] = useState(false);
 
   useEffect(() => {
-    const fetchMovieReviews = async () => {
-      const response = await axios.get(
-        `https://api.themoviedb.org/3/movie/${movieId}/reviews`,
-        {
-          headers: {
-            Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiI0Mzk2YmI2ZmE5ZGYzYTZkYzFjNWY1YWQ5ODVhMGI5MCIsIm5iZiI6MTcyMjA3NzQwMS4xNDQwODksInN1YiI6IjY2YTRjZjU3ZDhhNTJkNzJjZjg3Y2ZjZSIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.gGSqTtFneYLfE3HZ0NK6NWEi5UXzyRirlVKnPCIsFiU`,
-          },
+    const getReviews = async () => {
+      try {
+        const data = await fetchMovieReviews(movieId);
+        if (data.length === 0) {
+          setNoReviews(true);
+        } else {
+          setReviews(data);
+          setNoReviews(false);
         }
-      );
-      setReviews(response.data.results);
+        setError(null);
+      } catch (err) {
+        setError("Failed to fetch reviews.");
+        setNoReviews(false);
+      }
     };
-    fetchMovieReviews();
+
+    getReviews();
   }, [movieId]);
 
   return (
     <>
+      {" "}
+      {error && <p className={s.error}>{error}</p>}
+      {noReviews && !error && (
+        <p className={s.error}>No reviews available for this movie.</p>
+      )}
       <h2 className={s.title}>Reviews</h2>
       <div className={s.review}>
         <ul className={s.text}>
