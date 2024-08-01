@@ -26,8 +26,11 @@
 }
 
 .error {
+    grid-column: 2;
+    grid-row: 4;
     color: #fff;
     font-weight: 400;
     display: flex;
     margin: 0 auto;
+    align-items: center;
 }

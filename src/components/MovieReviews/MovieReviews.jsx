@@ -1,28 +1,21 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import s from "./MovieReview.module.css";
+import s from "./MovieReviews.module.css";
 import { fetchMovieReviews } from "../../API";
 
 const MovieReviews = () => {
   const { movieId } = useParams();
   const [reviews, setReviews] = useState([]);
   const [error, setError] = useState(null);
-  const [noReviews, setNoReviews] = useState(false);
 
   useEffect(() => {
     const getReviews = async () => {
       try {
         const data = await fetchMovieReviews(movieId);
-        if (data.length === 0) {
-          setNoReviews(true);
-        } else {
-          setReviews(data);
-          setNoReviews(false);
-        }
+        setReviews(data);
         setError(null);
       } catch (err) {
         setError("Failed to fetch reviews.");
-        setNoReviews(false);
       }
     };
 
@@ -33,7 +26,7 @@ const MovieReviews = () => {
     <>
       {" "}
       {error && <p className={s.error}>{error}</p>}
-      {noReviews && !error && (
+      {!error && reviews.length === 0 && (
         <p className={s.error}>No reviews available for this movie.</p>
       )}
       <h2 className={s.title}>Reviews</h2>

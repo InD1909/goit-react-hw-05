@@ -13,6 +13,25 @@ const MoviesPage = () => {
   const location = useLocation();
 
   useEffect(() => {
+    const handleSearch = async (searchQuery) => {
+      if (searchQuery.trim() === "") {
+        setMovies([]);
+        setError(false);
+        setNoMovies(true);
+        return;
+      }
+
+      try {
+        const results = await searchMovies(searchQuery);
+        setMovies(results);
+        setError(null);
+        setNoMovies(false);
+      } catch (error) {
+        setError("Failed to fetch movies.");
+        setMovies([]);
+      }
+    };
+
     const queryParam = searchParams.get("query") || "";
     setQuery(queryParam);
 
@@ -21,30 +40,6 @@ const MoviesPage = () => {
     }
   }, [searchParams]);
 
-  const handleSearch = async (searchQuery, updateURL = true) => {
-    if (searchQuery.trim() === "") {
-      setMovies([]);
-      setError(false);
-      setNoMovies(true);
-      return;
-    }
-
-    try {
-      const results = await searchMovies(searchQuery);
-      setMovies(results);
-      setError(null);
-      setNoMovies(false);
-
-      if (updateURL) {
-        searchParams.set("query", searchQuery);
-        setSearchParams(searchParams);
-      }
-    } catch (error) {
-      setError("Failed to fetch movies.");
-      setMovies([]);
-    }
-  };
-
   const onChange = (event) => {
     const newValue = event.target.value;
     setQuery(newValue);
@@ -52,8 +47,8 @@ const MoviesPage = () => {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    handleSearch(query);
   };
+
   return (
     <div>
       <h2 className={s.title}>Search Movies</h2>

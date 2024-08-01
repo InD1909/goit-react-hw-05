@@ -1,8 +1,9 @@
-import { NavLink } from "react-router-dom";
+import { NavLink, useLocation } from "react-router-dom";
 import getImageUrl from "./MoviesImg";
 import s from "./MovieList.module.css";
 
 const MovieList = ({ movies }) => {
+  const location = useLocation();
   return (
     <ul className={s.ul}>
       {movies.map((movie) => (
@@ -10,7 +11,11 @@ const MovieList = ({ movies }) => {
           <img src={getImageUrl(movie.poster_path)} alt={movie.title} />
           <div className={s.container}>
             <h3 className={s.name}>{movie.title}</h3>
-            <NavLink to={`/movies/${movie.id}`} className={s.link}>
+            <NavLink
+              to={`/movies/${movie.id}`}
+              className={s.link}
+              state={location}
+            >
               Go to film
             </NavLink>
           </div>
