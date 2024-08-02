@@ -14,10 +14,8 @@ const MoviesPage = () => {
 
   useEffect(() => {
     const queryParam = searchParams.get("query") || "";
-    if(!queryParam)return;
+    if (!queryParam) return;
     const handleSearch = async () => {
-    
-     
       try {
         const results = await searchMovies(queryParam);
         setMovies(results);
@@ -29,12 +27,7 @@ const MoviesPage = () => {
       }
     };
 
- 
-    
-
-  
-      handleSearch(,);
-    
+    handleSearch();
   }, [searchParams]);
 
   const onChange = (event) => {
@@ -47,7 +40,7 @@ const MoviesPage = () => {
     if (query.trim() === "") {
       return;
     }
-    setSearchParams({query})
+    setSearchParams({ query });
   };
 
   return (
@@ -60,9 +53,7 @@ const MoviesPage = () => {
           className={s.form}
           placeholder="Type film's name..."
         />
-        <button className={s.btn}>
-          Search
-        </button>
+        <button className={s.btn}>Search</button>
       </form>
       {error && <p className={s.error}>{error}</p>}
       {noMovies && !error && (
